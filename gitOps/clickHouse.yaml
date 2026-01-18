@@ -6,6 +6,9 @@ metadata:
 spec:
   serviceName: clickhouse
   replicas: 1
+  selector:
+      matchLabels:
+        app: clickhouse
   template:
     spec:
       containers:
