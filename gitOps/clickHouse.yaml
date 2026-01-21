@@ -1,59 +1,59 @@
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: clickhouse
-  namespace: monitoring
-spec:
-  serviceName: clickhouse
-  replicas: 1
-  selector:
-      matchLabels:
-        app: clickhouse
-  template:
-    metadata:
-      labels:
-        app: clickhouse
-    spec:
-      containers:
-      - name: clickhouse
-        image: clickhouse/clickhouse-server:latest
-        env:
-          - name: CLICKHOUSE_USER
-            value: "default"
-          - name: CLICKHOUSE_PASSWORD
-            value: "default"
-        resources:
-          limits:
-            memory: "4Gi"
-            cpu: "2"
-        ports:
-        - containerPort: 8123
-        - containerPort: 9000
-        volumeMounts:
-        - name: ck-data
-          mountPath: /var/lib/clickhouse
-      volumes:
-      - name: ck-data
-        hostPath:
-          path: /opt/clickhouse
-          type: DirectoryOrCreate
+# apiVersion: apps/v1
+# kind: StatefulSet
+# metadata:
+#   name: clickhouse
+#   namespace: monitoring
+# spec:
+#   serviceName: clickhouse
+#   replicas: 1
+#   selector:
+#       matchLabels:
+#         app: clickhouse
+#   template:
+#     metadata:
+#       labels:
+#         app: clickhouse
+#     spec:
+#       containers:
+#       - name: clickhouse
+#         image: clickhouse/clickhouse-server:latest
+#         env:
+#           - name: CLICKHOUSE_USER
+#             value: "default"
+#           - name: CLICKHOUSE_PASSWORD
+#             value: "123456"
+#         resources:
+#           limits:
+#             memory: "4Gi"
+#             cpu: "2"
+#         ports:
+#         - containerPort: 8123
+#         - containerPort: 9000
+#         volumeMounts:
+#         - name: ck-data
+#           mountPath: /var/lib/clickhouse
+#       volumes:
+#       - name: ck-data
+#         hostPath:
+#           path: /opt/clickhouse
+#           type: DirectoryOrCreate
 
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: clickhouse
-  namespace: monitoring
-spec:
-  selector:
-    app: clickhouse
-  ports:
-    - name: http
-      protocol: TCP
-      port: 8123 
-      targetPort: 8123
-    - name: tcp
-      protocol: TCP
-      port: 9000
-      targetPort: 9000
-  type: ClusterIP
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: clickhouse
+#   namespace: monitoring
+# spec:
+#   selector:
+#     app: clickhouse
+#   ports:
+#     - name: http
+#       protocol: TCP
+#       port: 8123 
+#       targetPort: 8123
+#     - name: tcp
+#       protocol: TCP
+#       port: 9000
+#       targetPort: 9000
+#   type: ClusterIP
