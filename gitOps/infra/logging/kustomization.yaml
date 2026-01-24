@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: monitoring
 
 resources:
-  - clickHouse.yaml
+  - clickhouse-init.yaml
+  - clickhouse.yaml
   - grafana.yaml
-  - ingress.yaml
   - otel-collector.yaml
