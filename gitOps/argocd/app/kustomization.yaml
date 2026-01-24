@@ -4,3 +4,5 @@ resources:
   - argo-rollout.yaml
   - istio.yaml
   - logging.yaml
+  - argocd-image-updater.yaml
+  - argo-workflows.yaml
