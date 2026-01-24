@@ -4,7 +4,7 @@ metadata:
   name: argo-rollouts
   namespace: argocd
 spec:
-  project: default
+  project: infra-project
   source:
     chart: argo-rollouts
     repoURL: https://argoproj.github.io/argo-helm
