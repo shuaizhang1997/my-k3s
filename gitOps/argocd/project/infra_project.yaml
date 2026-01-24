@@ -5,8 +5,6 @@ metadata:
   namespace: argocd
 spec:
   description: "infra"
-  sourceRepos: 
-    - git@github.com:shuaizhang1997/my-k3s.git
   destinations:
     - namespace: "*"
       server: https://kubernetes.default.svc
@@ -17,4 +15,4 @@ spec:
     - group: "*"
       kind: "*"
   sourceRepos:
-    - *
+    - "*"
