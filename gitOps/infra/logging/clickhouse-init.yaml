@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: clickhouse-init-scripts
+data:
+  01-init-otel.sql: |
+    CREATE DATABASE IF NOT EXISTS otel_logs;

@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: clickhouse
-  namespace: monitoring
 spec:
   serviceName: clickhouse
   replicas: 1
@@ -32,18 +31,22 @@ spec:
         volumeMounts:
         - name: ck-data
           mountPath: /var/lib/clickhouse
+        - name: init-scripts
+          mountPath: /docker-entrypoint-initdb.d
       volumes:
       - name: ck-data
         hostPath:
           path: /opt/clickhouse
           type: DirectoryOrCreate
+      - name: init-scripts
+        configMap:
+          name: clickhouse-init-scripts
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: clickhouse
-  namespace: monitoring
 spec:
   selector:
     app: clickhouse
