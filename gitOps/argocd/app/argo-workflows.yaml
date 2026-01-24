@@ -4,7 +4,7 @@ metadata:
   name: argo-workflows
   namespace: argocd
 spec:
-  project: infra-project
+  project: default
   source:
     repoURL: git@github.com:shuaizhang1997/my-k3s.git
     targetRevision: master
