@@ -8,3 +8,4 @@ resources:
   - clickhouse.yaml
   - grafana.yaml
   - otel-collector.yaml
+  - grafana-ingress.yaml
