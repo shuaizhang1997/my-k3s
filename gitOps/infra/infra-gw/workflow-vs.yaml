@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: workflow-vs
+  namespace: argocd
+spec:
+  hosts:
+  - workflow.k3s.szlab.uk
+  gateways:
+  - istio-system/infra-gateway
+  http:
+  - route:
+    - destination:
+        host: argo-workflows-server
+        port:
+          number: 2746
