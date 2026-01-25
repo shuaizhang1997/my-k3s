@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: workflow-vs
-  namespace: argocd
+  namespace: argo-workflows
 spec:
   hosts:
   - workflow.k3s.szlab.uk
