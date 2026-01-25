@@ -23,6 +23,8 @@ data:
         username: default
         password: "123456"
         logs_table_name: otel_logs
+        tracing_table_name: otel_traces 
+        create_schema: true
 
     service:
       pipelines:

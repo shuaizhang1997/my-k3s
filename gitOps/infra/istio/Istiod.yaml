@@ -18,11 +18,15 @@ spec:
               otel:
                 service: otel-collector.monitoring.svc.cluster.local
                 port: 4317
+            - name: otel-log-provider
+              otelLog:
+                service: otel-collector.monitoring.svc.cluster.local
+                port: 4317
           defaultProviders:
             tracing: [otel-collector]
-            accessLogging: [otel-collector]
+            accessLogging: [otel-log-provider]
         pilot:
-          traceSampling: 50.0
+          traceSampling: 100.0
   
   destination:
     server: https://kubernetes.default.svc

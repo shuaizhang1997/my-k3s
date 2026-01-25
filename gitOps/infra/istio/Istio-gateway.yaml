@@ -12,7 +12,7 @@ spec:
     helm:
       values: |
         service:
-          type: LoadBalancer # K3s 会自动调用 ServiceLB
+          type: LoadBalancer
           ports:
           - name: http2
             port: 80
