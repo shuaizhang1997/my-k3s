@@ -1,20 +1,20 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: argocd-server-ingress
-  namespace: argocd
+  name: argo-workflows-ingress
+  namespace: argo-workflows
   annotations:
     kubernetes.io/ingress.class: istio
     nginx.ingress.kubernetes.io/ssl-passthrough: "true" 
 spec:
   rules:
-  - host: argo.k3s.szlab.uk
+  - host: workflow.k3s.szlab.uk
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: argocd-server
+            name: argo-workflows-server
             port:
-              number: 80
+              number: 2746
