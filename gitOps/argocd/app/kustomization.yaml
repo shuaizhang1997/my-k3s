@@ -6,3 +6,4 @@ resources:
   - logging.yaml
   - argocd-image-updater.yaml
   - argo-workflows.yaml
+  - cert-manager.yaml

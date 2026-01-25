@@ -1,0 +1,27 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: cloudflare-issuer
+spec:
+  acme:
+    email: shuaibioo@outlook.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-account-key
+    solvers:
+    - selector:
+        dnsZones:
+          - "k3s.shuaizhang.net"
+      dns01:
+        cloudflare:
+          apiTokenSecretRef:
+            name: dns-tokens
+            key: net-token
+    - selector:
+        dnsZones:
+          - "szlab.uk"
+      dns01:
+        cloudflare:
+          apiTokenSecretRef:
+            name: dns-tokens
+            key: uk-token

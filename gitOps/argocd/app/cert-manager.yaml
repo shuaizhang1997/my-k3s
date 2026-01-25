@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager-chart
+  namespace: argocd
+spec:
+  project: infra-default
+  source:
+    repoURL: git@github.com:shuaizhang1997/my-k3s.git
+    targetRevision: master
+    path: gitOps/infra/cert-manager
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cert-manager
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
