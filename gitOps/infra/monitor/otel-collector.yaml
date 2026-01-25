@@ -23,7 +23,7 @@ data:
         username: default
         password: "123456"
         logs_table_name: otel_logs
-        tracing_table_name: otel_traces 
+        traces_table_name: otel_traces 
         create_schema: true
 
     service:
@@ -54,10 +54,10 @@ spec:
           limits:
             cpu: 500m
             memory: 512Mi
-        args: ["--config=/etc/otel-collector-config.yaml"]
+        args: ["--config=/etc/otel-collector/relay.yaml"]
         volumeMounts:
         - name: otel-collector-config-vol
-          mountPath: /etc/otel-collector-config.yaml
+          mountPath: /etc/otel-collector/relay.yaml
           subPath: relay.yaml
       volumes:
       - name: otel-collector-config-vol
