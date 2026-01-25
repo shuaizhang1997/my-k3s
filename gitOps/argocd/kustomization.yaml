@@ -6,5 +6,4 @@ resources:
   - ./repository
   - ./app
   - ./project
-  - argocd-ingress.yaml
 
