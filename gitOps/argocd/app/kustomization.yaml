@@ -6,7 +6,7 @@ patches:
     patch: |-
       - op: replace
         path: /spec/destination/server
-        value: "https://cluster-not-set"
+        value: "https://kubernetes.default.svc"
       - op: replace
         path: /spec/syncPolicy
         value:
