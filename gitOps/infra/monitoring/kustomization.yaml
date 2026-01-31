@@ -11,7 +11,7 @@ resources:
   - otel-collector/otel-collector-conf.yaml
   - otel-collector/otel-collector-svc.yaml
   - otel-collector/otel-collector.yaml
-  - grafana/grafana-app.yaml
+  - grafana/grafana.yaml
   - grafana/grafana-svc.yaml
 
 configMapGenerator:
