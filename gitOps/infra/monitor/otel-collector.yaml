@@ -21,7 +21,7 @@ data:
       clickhouse:
         endpoint: tcp://clickhouse:9000?database=otel_logs
         username: default
-        password: "123456"
+        password: "${env:CH_PASSWORD}"
         logs_table_name: otel_logs
         traces_table_name: otel_traces 
         create_schema: true
@@ -49,7 +49,13 @@ spec:
     spec:
       containers:
       - name: otel-collector
-        image: otel/opentelemetry-collector-contrib:latest
+        image: otel/opentelemetry-collector-contrib:sha256-b5bd42b0bdca0dc8613d11581bd841e7c1ee6cd4d8326badc362d860d9a2f8f3.sig
+        env:
+        - name: CH_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: clickhouse-auth
+              key: password
         resources:
           limits:
             cpu: 500m

@@ -27,6 +27,13 @@ spec:
             accessLogging: [otel-log-provider]
         pilot:
           traceSampling: 100.0
+          resources:
+            requests:
+              cpu: 200m 
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
   
   destination:
     server: https://kubernetes.default.svc

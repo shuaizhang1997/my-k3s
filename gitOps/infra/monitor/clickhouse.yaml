@@ -20,7 +20,12 @@ spec:
           - name: CLICKHOUSE_USER
             value: "default"
           - name: CLICKHOUSE_PASSWORD
-            value: "123456"
+            valueFrom:
+              secretKeyRef:
+                name: clickhouse-auth
+                key: password
+          - name: CLICKHOUSE_SERVER_MEMORY_USAGE_TO_RAM_RATIO
+            value: "0.9"
         resources:
           limits:
             memory: "4Gi"

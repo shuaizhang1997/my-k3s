@@ -10,11 +10,36 @@ spec:
     repoURL: https://charts.jetstack.io
     targetRevision: v1.13.0
     helm:
-      parameters:
-        - name: installCRDs
-          value: "true"
-        - name: extraArgs[0]
-          value: "--dns01-recursive-nameservers-only"
+      values: |
+        installCRDs: true
+        global:
+          leaderElection:
+            namespace: cert-manager
+        extraArgs:
+          - --dns01-recursive-nameservers-only
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+        webhook:
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+        cainjector:
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
   destination:
     server: "https://kubernetes.default.svc"
     namespace: cert-manager

@@ -20,6 +20,13 @@ spec:
           - name: https
             port: 443
             targetPort: 443
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
   destination:
     server: https://kubernetes.default.svc
     namespace: istio-system
