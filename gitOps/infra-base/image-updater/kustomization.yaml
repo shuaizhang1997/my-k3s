@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonAnnotations:
+  argocd.argoproj.io/sync-wave: "3"
+
+namespace: argocd
+
+helmCharts:
+  - name: argocd-image-updater
+    releaseName: argocd-image-updater
+    version: 0.9.1
+    repo: https://argoproj.github.io/argo-helm
+    valuesFile: values.yaml
+    namespace: argocd

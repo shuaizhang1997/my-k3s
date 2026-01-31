@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: infra-non-prod
+  namespace: argocd
+spec:
+  description: "non-prod"
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: '*' 
+  sourceRepos:
+    - '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: infra-prod
+  namespace: argocd
+spec:
+  description: "prod"
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: '*'
+  sourceRepos:
+    - '*'

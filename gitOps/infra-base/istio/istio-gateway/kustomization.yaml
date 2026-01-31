@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonAnnotations:
+  argocd.argoproj.io/sync-wave: "3"
+
+namespace: istio-system
+
+helmCharts:
+  - name: gateway
+    releaseName: istio-ingressgateway
+    version: 1.28.3
+    repo: https://istio-release.storage.googleapis.com/charts
+    valuesFile: values.yaml

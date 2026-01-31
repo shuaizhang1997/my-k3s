@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: infra-non-prod-suite
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: git@github.com:shuaizhang1997/my-k3s.git
+        revision: master
+        directories:
+          - path: gitOps/clusters/non-prod/infra/**
+  template:
+    metadata:
+      name: 'non-prod-{{path.basename}}'
+      labels:
+        env: non-prod
+    spec:
+      project: infra-non-prod
+      source:
+        repoURL: git@github.com:shuaizhang1997/my-k3s.git
+        targetRevision: master
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
