@@ -8,3 +8,4 @@ resources:
   - argo-workflows.yaml
   - cert-manager.yaml
   - infra-service.yaml
+  - sealed-secrets.yaml
