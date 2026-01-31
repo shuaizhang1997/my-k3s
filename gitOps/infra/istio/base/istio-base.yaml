@@ -3,8 +3,10 @@ kind: Application
 metadata:
   name: istio-base
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
-  project: infra-project
+  project: "templated-by-parent"
   source:
     repoURL: https://istio-release.storage.googleapis.com/charts
     chart: base
@@ -12,6 +14,3 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: istio-system
-  syncPolicy:
-    automated: {prune: true, selfHeal: true}
-    createNamespace: true

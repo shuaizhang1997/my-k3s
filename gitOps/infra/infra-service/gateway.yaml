@@ -13,6 +13,7 @@ spec:
       protocol: HTTP
     hosts:
     - "*.k3s.szlab.uk"
+    - "*.k3s.shuaizhang.net"
     tls:
       httpsRedirect: true
   - port:
@@ -24,3 +25,4 @@ spec:
       credentialName: szlab-wildcard-tls
     hosts:
     - "*.k3s.szlab.uk"
+    - "*.k3s.shuaizhang.net"

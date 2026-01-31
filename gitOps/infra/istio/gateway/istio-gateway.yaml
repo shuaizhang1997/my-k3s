@@ -1,17 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-image-updater
+  name: istio-ingressgateway
   namespace: argocd
-spec:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
   project: "templated-by-parent"
   source:
-    repoURL: https://argoproj.github.io/argo-helm
-    chart: argocd-image-updater
-    targetRevision: 1.0.4
+    repoURL: https://istio-release.storage.googleapis.com/charts
+    chart: gateway
+    targetRevision: 1.28.3
     helm:
       valueFiles:
         - values.yaml
   destination:
     server: https://templated-by-parent
-    namespace: argocd
+    namespace: istio-system

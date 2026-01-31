@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: monitoring
+
+resources:
+  - clickhouse/clickhouse-init.yaml
+  - clickhouse/clickhouse-svc.yaml
+  - clickhouse/clickhouse-sealed-secret.yaml
+  - clickhouse/clickhouse.yaml
+  - otel-collector/otel-collector-conf.yaml
+  - otel-collector/otel-collector-svc.yaml
+  - otel-collector/otel-collector.yaml
+  - grafana/grafana-app.yaml
+  - grafana/grafana-svc.yaml
+
+configMapGenerator:
+  - name: otel-collector-config
+    files:
+      - otel-collector/otel-collector-conf.yaml

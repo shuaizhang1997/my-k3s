@@ -4,29 +4,17 @@ metadata:
   name: argo-rollouts
   namespace: argocd
 spec:
-  project: default
+  project: "templated-by-parent"
   source:
     chart: argo-rollouts
     repoURL: https://argoproj.github.io/argo-helm
     targetRevision: 2.37.2
-    helm:
-      values: |
-        controller:
-          resources:
-            requests:
-              cpu: 100m
-              memory: 128Mi
-            limits:
-              cpu: 500m
-              memory: 512Mi
+    helm:   
+      valueFiles:
+        - values.yaml
   destination:
-    server: https://kubernetes.default.svc
+    server: "https://templated-by-parent"
     namespace: argo-rollouts
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    createNamespace: true
   ignoreDifferences:
     - group: apiextensions.k8s.io
       kind: CustomResourceDefinition

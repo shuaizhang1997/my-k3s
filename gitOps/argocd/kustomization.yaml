@@ -6,4 +6,5 @@ resources:
   - ./repository
   - ./app
   - ./project
+  - ./namespaces
 

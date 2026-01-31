@@ -1,0 +1,23 @@
+meshConfig:
+  accessLogFile: /dev/stdout
+  extensionProviders:
+    - name: otel-collector
+      otel:
+        service: otel-collector.monitoring.svc.cluster.local
+        port: 4317
+    - name: otel-log-provider
+      otelLog:
+        service: otel-collector.monitoring.svc.cluster.local
+        port: 4317
+  defaultProviders:
+    tracing: [otel-collector]
+    accessLogging: [otel-log-provider]
+pilot:
+  traceSampling: 100.0
+  resources:
+    requests:
+      cpu: 200m 
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 1Gi

@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: istio
   namespace: argocd
+  annotations:
+      argocd.argoproj.io/sync-wave: "-5"
 spec:
   project: infra-project
   source:
@@ -10,9 +12,6 @@ spec:
     targetRevision: master
     path: gitOps/infra/istio
   destination:
-    server: https://kubernetes.default.svc
+    server: "https://cluster-not-set"
     namespace: istio-system
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  syncPolicy: {}

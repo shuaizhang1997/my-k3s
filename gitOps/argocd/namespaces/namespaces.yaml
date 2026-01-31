@@ -1,17 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argo-workflows-chart
+  name: cluster-namespaces
   namespace: argocd
   annotations:
-      argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/sync-wave: "-20"
 spec:
   project: default
   source:
     repoURL: git@github.com:shuaizhang1997/my-k3s.git
     targetRevision: master
-    path: gitOps/infra/argo-workflows
+    path: gitOps/infra/namespaces
   destination:
     server: "https://cluster-not-set"
-    namespace: argo-workflows
-  syncPolicy: {}
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

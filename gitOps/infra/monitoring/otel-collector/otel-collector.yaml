@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otel-collector
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: otel-collector
+  template:
+    metadata:
+      labels:
+        app: otel-collector
+    spec:
+      containers:
+      - name: otel-collector
+        image: otel/opentelemetry-collector-contrib:sha256-b5bd42b0bdca0dc8613d11581bd841e7c1ee6cd4d8326badc362d860d9a2f8f3.sig
+        env:
+        - name: CH_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: clickhouse-auth
+              key: password
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+        args: ["--config=/etc/otel-collector/relay.yaml"]
+        volumeMounts:
+        - name: otel-collector-config-vol
+          mountPath: /etc/otel-collector/relay.yaml
+          subPath: relay.yaml
+      volumes:
+      - name: otel-collector-config-vol
+        configMap:
+          name: otel-collector-conf
