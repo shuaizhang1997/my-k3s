@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: otel-collector
-        image: otel/opentelemetry-collector-contrib:sha256-4e8508c4fc97b221d4b30288b1a48707da20ca010f32443af21769502edec2f0.sig
+        image: otel/opentelemetry-collector-contrib@sha256-4e8508c4fc97b221d4b30288b1a48707da20ca010f32443af21769502edec2f0
         env:
         - name: CH_PASSWORD
           valueFrom:
