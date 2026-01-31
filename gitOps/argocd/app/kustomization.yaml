@@ -15,7 +15,7 @@ patches:
             selfHeal: true
           syncOptions:
             - CreateNamespace=true
-            - ServerSideApply=true #
+            - ServerSideApply=true
 resources:
   - argo-rollout.yaml
   - istio.yaml
