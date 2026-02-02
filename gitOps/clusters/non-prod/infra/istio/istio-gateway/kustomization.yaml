@@ -1,5 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+commonAnnotations:
+  argocd.argoproj.io/sync-wave: "3"
 resources:
   - ../../../../infra-base/istio/istio-gateway
+  - gateway.yaml
+  - infra-cert.yaml
 namespace: istio-system

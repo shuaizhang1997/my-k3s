@@ -3,4 +3,5 @@ kind: Kustomization
 resources:
   - ../../../../infra-base/monitoring
   - ns.yaml
+  - grafana-vs.yaml
 namespace: monitoring
