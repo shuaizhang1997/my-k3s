@@ -12,7 +12,7 @@ spec:
             wave: "-10"
             destNamespace: "kube-system"
           - appName: istio-base
-            path: gitOps/clusters/non-prod/infra/istio/istio-base
+            path: gitOps/clusters/non-prod/infra/istio-base
             wave: "-5"
             destNamespace: "istio-system"
           - appName: cert-manager
@@ -24,11 +24,11 @@ spec:
             wave: "-3"
             destNamespace: "istio-system"
           - appName: istiod
-            path: gitOps/clusters/non-prod/infra/istio/istiod
+            path: gitOps/clusters/non-prod/infra/istiod
             wave: "0"
             destNamespace: "istio-system"
           - appName: istio-gateway
-            path: gitOps/clusters/non-prod/infra/istio/istio-gateway
+            path: gitOps/clusters/non-prod/infra/istio-gateway
             wave: "5"
             destNamespace: "istio-system"
           - appName: argo-rollouts
