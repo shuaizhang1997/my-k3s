@@ -1,29 +1,64 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: infra-non-prod-suite
+  name: infra-non-prod
   namespace: argocd
 spec:
   generators:
-    - git:
-        repoURL: git@github.com:shuaizhang1997/my-k3s.git
-        revision: master
-        directories:
-          - path: gitOps/clusters/non-prod/infra/**
+    - matrix:
+        generators:
+          - git:
+              repoURL: git@github.com:shuaizhang1997/my-k3s.git
+              revision: master
+              directories:
+                - path: gitOps/clusters/non-prod/infra/*
+                - path: gitOps/clusters/non-prod/infra/istio/*
+          - list:
+              elements:
+                - path: gitOps/clusters/non-prod/infra/sealed-secrets
+                  wave: "-10"
+                  destNamespace: "kube-system"
+                - path: gitOps/clusters/non-prod/infra/istio/istio-base
+                  wave: "-5"
+                  destNamespace: "istio-system"
+                - path: gitOps/clusters/non-prod/infra/cert-manager
+                  wave: "-4"
+                  destNamespace: "cert-manager"
+                - path: gitOps/clusters/non-prod/infra/issuer
+                  wave: "-3"
+                  destNamespace: "istio-system"
+                - path: gitOps/clusters/non-prod/infra/istio/istiod
+                  wave: "0"
+                  destNamespace: "istio-system"
+                - path: gitOps/clusters/non-prod/infra/istio/istio-gateway
+                  wave: "5"
+                  destNamespace: "istio-system"
+                - path: gitOps/clusters/non-prod/infra/argo-rollouts
+                  wave: "10"
+                  destNamespace: "argo-rollouts"
+                - path: gitOps/clusters/non-prod/infra/argo-workflows
+                  wave: "10"
+                  destNamespace: "argo-workflows"
+                - path: gitOps/clusters/non-prod/infra/monitoring
+                  wave: "20"
+                  destNamespace: "monitoring"
   template:
     metadata:
       name: 'non-prod-{{path.basename}}'
-      labels:
-        env: non-prod
+      annotations:
+        argocd.argoproj.io/sync-wave: '{{wave}}'
     spec:
-      project: infra-non-prod
+      project: default
       source:
         repoURL: git@github.com:shuaizhang1997/my-k3s.git
         targetRevision: master
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
+        namespace: '{{destNamespace}}' 
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

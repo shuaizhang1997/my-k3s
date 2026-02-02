@@ -4,6 +4,6 @@ commonAnnotations:
   argocd.argoproj.io/sync-wave: "3"
 resources:
   - ../../../../infra-base/istio/istio-gateway
+  - ../../../../infra-base/istio/istio-telemetry
   - gateway.yaml
   - infra-cert.yaml
-namespace: istio-system
