@@ -5,46 +5,47 @@ metadata:
   namespace: argocd
 spec:
   generators:
-    - matrix:
-        generators:
-          - git:
-              repoURL: git@github.com:shuaizhang1997/my-k3s.git
-              revision: master
-              directories:
-                - path: gitOps/clusters/non-prod/infra/*
-                - path: gitOps/clusters/non-prod/infra/istio/*
-          - list:
-              elements:
-                - path: gitOps/clusters/non-prod/infra/sealed-secrets
-                  wave: "-10"
-                  destNamespace: "kube-system"
-                - path: gitOps/clusters/non-prod/infra/istio/istio-base
-                  wave: "-5"
-                  destNamespace: "istio-system"
-                - path: gitOps/clusters/non-prod/infra/cert-manager
-                  wave: "-4"
-                  destNamespace: "cert-manager"
-                - path: gitOps/clusters/non-prod/infra/issuer
-                  wave: "-3"
-                  destNamespace: "istio-system"
-                - path: gitOps/clusters/non-prod/infra/istio/istiod
-                  wave: "0"
-                  destNamespace: "istio-system"
-                - path: gitOps/clusters/non-prod/infra/istio/istio-gateway
-                  wave: "5"
-                  destNamespace: "istio-system"
-                - path: gitOps/clusters/non-prod/infra/argo-rollouts
-                  wave: "10"
-                  destNamespace: "argo-rollouts"
-                - path: gitOps/clusters/non-prod/infra/argo-workflows
-                  wave: "10"
-                  destNamespace: "argo-workflows"
-                - path: gitOps/clusters/non-prod/infra/monitoring
-                  wave: "20"
-                  destNamespace: "monitoring"
+    - list:
+        elements:
+          - appName: sealed-secrets
+            path: gitOps/clusters/non-prod/infra/sealed-secrets
+            wave: "-10"
+            destNamespace: "kube-system"
+          - appName: istio-base
+            path: gitOps/clusters/non-prod/infra/istio/istio-base
+            wave: "-5"
+            destNamespace: "istio-system"
+          - appName: cert-manager
+            path: gitOps/clusters/non-prod/infra/cert-manager
+            wave: "-4"
+            destNamespace: "cert-manager"
+          - appName: issuer
+            path: gitOps/clusters/non-prod/infra/issuer
+            wave: "-3"
+            destNamespace: "istio-system"
+          - appName: istiod
+            path: gitOps/clusters/non-prod/infra/istio/istiod
+            wave: "0"
+            destNamespace: "istio-system"
+          - appName: istio-gateway
+            path: gitOps/clusters/non-prod/infra/istio/istio-gateway
+            wave: "5"
+            destNamespace: "istio-system"
+          - appName: argo-rollouts
+            path: gitOps/clusters/non-prod/infra/argo-rollouts
+            wave: "10"
+            destNamespace: "argo-rollouts"
+          - appName: argo-workflows
+            path: gitOps/clusters/non-prod/infra/argo-workflows
+            wave: "10"
+            destNamespace: "argo-workflows"
+          - appName: monitoring
+            path: gitOps/clusters/non-prod/infra/monitoring
+            wave: "20"
+            destNamespace: "monitoring"
   template:
     metadata:
-      name: 'non-prod-{{path.basename}}'
+      name: 'non-prod-{{appName}}'
       annotations:
         argocd.argoproj.io/sync-wave: '{{wave}}'
     spec:
