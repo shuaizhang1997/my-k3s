@@ -10,7 +10,6 @@ spec:
           - appName: sealed-secrets
             path: gitOps/clusters/non-prod/infra/sealed-secrets
             wave: "-10"
-            destNamespace: "kube-system"
           - appName: istio-base
             path: gitOps/clusters/non-prod/infra/istio-base
             wave: "-5"
@@ -18,31 +17,27 @@ spec:
           - appName: cert-manager
             path: gitOps/clusters/non-prod/infra/cert-manager
             wave: "-4"
-            destNamespace: "cert-manager"
           - appName: issuer
             path: gitOps/clusters/non-prod/infra/issuer
             wave: "-3"
-            destNamespace: "istio-system"
           - appName: istiod
             path: gitOps/clusters/non-prod/infra/istiod
             wave: "0"
-            destNamespace: "istio-system"
           - appName: istio-gateway
             path: gitOps/clusters/non-prod/infra/istio-gateway
             wave: "5"
-            destNamespace: "istio-system"
           - appName: argo-rollouts
             path: gitOps/clusters/non-prod/infra/argo-rollouts
             wave: "10"
-            destNamespace: "argo-rollouts"
           - appName: argo-workflows
             path: gitOps/clusters/non-prod/infra/argo-workflows
             wave: "10"
-            destNamespace: "argo-workflows"
+          - appName: argo-workflows
+            path: gitOps/clusters/non-prod/infra/image-updater
+            wave: "10"
           - appName: monitoring
             path: gitOps/clusters/non-prod/infra/monitoring
             wave: "20"
-            destNamespace: "monitoring"
   template:
     metadata:
       name: 'non-prod-{{appName}}'
@@ -58,7 +53,6 @@ spec:
           buildOptions: "--enable-helm"
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{destNamespace}}' 
       syncPolicy:
         automated:
           prune: true

@@ -7,3 +7,4 @@ resources:
   - ../../../../infra-base/istio/istio-telemetry
   - gateway.yaml
   - infra-cert.yaml
+namespace: istio-system

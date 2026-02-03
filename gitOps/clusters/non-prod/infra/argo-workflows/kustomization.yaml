@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - ../../../../infra-base/argo-workflows
   - workflow-vs.yaml
+namespace: argo-workflows
