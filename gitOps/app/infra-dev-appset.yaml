@@ -49,8 +49,8 @@ spec:
         repoURL: git@github.com:shuaizhang1997/my-k3s.git
         targetRevision: master
         path: '{{path}}'
-      kustomize:
-          buildOptions: "--enable-helm"
+        kustomize:
+            buildOptions: "--enable-helm"
       destination:
         server: https://kubernetes.default.svc
       syncPolicy:
